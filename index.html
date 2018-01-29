@@ -1,0 +1,82 @@
+<!DOCTYPE html >
+<html lang="en" data-ng-app="app" data-ng-controller="AppCtrl" ng-init="init()" ng-cloak>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>{{ langs.get("Dereban") }}</title>
+		<link rel="icon" href="/assets/img/favicon.ico" type="image/x-icon" />
+		<link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="/assets/css/fontawesome-all.min.css" />
+		<link rel="stylesheet" href="/assets/css/fontawesome.min.css" />
+		<link rel="stylesheet" href="/assets/css/toastr.css" />
+		<link rel="stylesheet" href="/assets/css/style.css" type="text/css" />
+	</head>
+	<body>
+		<header class="header fixed-top">
+			<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+				<div class="container-fluid">
+					<a class="navbar-brand" href="/">{{ langs.get("Dereban") }}</a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse" id="navbarNavDropdown">
+						<ul class="navbar-nav ml-auto">
+							<li class="nav-item mr-2">
+								<select class="form-control" ng-model="selectedLanguage" ng-change="setLanguage()">
+									<option value="en">EN</option>
+									<option value="uk">UK</option>
+								</select>
+							</li>
+
+							<li class="nav-item" ng-show="! isLoggedIn()" uib-dropdown is-open="show.LogIn">
+								<a href="javascript:;" class="btn btn-outline-success" uib-dropdown-toggle>{{ langs.get("Sign In") }}</a>
+								<div class="dropdown-menu dropdown-menu-right sign-in-block" uib-dropdown-menu>
+									<form name="form" class="px-4 py-3">
+										<div class="form-group">
+											<label>{{ langs.get('Email') }}</label>
+											<input name="email" class="form-control mr-sm-2" type="text" placeholder="email@example.com" ng-model="authUser.email" required="required" />
+										</div>
+										<div class="form-group">
+											<label>{{ langs.get('Password') }}</label>
+											<input name="password" class="form-control mr-sm-2" type="password" placeholder="{{ langs.get('Password') }}" ng-model="authUser.password" required="required" />
+										</div>
+										<div class="d-flex">
+											<a href="javascript:;" class="btn btn-outline-success my-2 my-sm-0" ng-click="signIn()">{{ langs.get('Sign in') }}</a>
+											<a href="/recovery" class="align-self-center ml-auto">{{ langs.get('Forgot password') }}</a>
+										</div>
+									</form>
+								</div>
+			                </li>
+							
+							<li class="nav-item" ng-show="isLoggedIn()">
+								<a href="javascript:;" class="nav-link" ng-click="logOut()">{{ langs.get("Log Out") }}</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</header>
+
+		<div ng-view></div>
+
+		<footer class="fixed-bottom bg-dark text-white container-fluid">
+			<div class="p-3">
+				<span>{{ langs.get('Copyright') }} {{ now.getFullYear() }}</span>
+				<span class="float-right">{{ langs.get('Dereban') }}</span>
+			</div>
+		</footer>
+
+		<script src="/assets/js/libs/jquery-3.2.1.min.js"></script>
+		<script src="/assets/js/libs/angular.js"></script>
+		<script src="/assets/js/libs/ui.js"></script>
+		<script src="/assets/js/libs/lib.js"></script>
+		<script src="/assets/js/libs/bootstrap.min.js"></script>
+		<script src="/assets/js/app.js"></script>
+		<script src="/assets/js/controllers/main_page.js"></script>
+		<script src="/assets/js/controllers/dashboard.js"></script>
+		<script src="/assets/js/controllers/results.js"></script>
+		<script src="/assets/js/controllers/activate.js"></script>
+		<script src="/assets/js/factories.js"></script>
+
+	</body>
+</html>

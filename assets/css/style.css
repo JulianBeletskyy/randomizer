@@ -1,0 +1,108 @@
+[ng-cloak] {
+	display: none;
+}
+
+html {
+  height: 100%;
+}
+
+button {
+  cursor: pointer;
+}
+
+.demo-body {
+  padding-top: 71px;
+}
+
+.dashboard-body {
+  padding-top: 56px;
+}
+
+.dropdown-toggle::after {
+    display:none;
+}
+
+.open .dropdown-menu {
+  display: block;
+}
+
+.sign-in-block {
+  min-width: 300px;
+}
+
+.navbar-dark .btn.btn-info {
+  border-color: #fff;
+}
+
+.navbar-dark .btn.btn-info:hover {
+  background-color: #fff;
+  color: #17a2b8;
+  /*border-color: #17a2b8;*/
+}
+
+.main-body {
+  position: fixed;
+  height: 100%;
+  left: 600px;
+  right: 0;
+}
+
+.group-list {
+  position: fixed;
+  width: 300px;
+  height: 100%;
+}
+
+.group-list-wrap {
+  overflow-y: auto;
+  height: 100%;
+}
+
+.user-list {
+  position: fixed;
+  width: 300px;
+  height: 100%;
+  left: 300px;
+}
+
+.user-list-wrap {
+  height: 100%;
+}
+
+.invisible-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.list-body {
+  max-height: 285px;
+  overflow-y: auto;
+}
+
+.invite-btn-body {
+  background: #fff;
+}
+
+.group-cell {
+  cursor: pointer;
+  border-bottom: 1px solid #e9ecef;
+  background-color: #fff;
+  box-shadow: inset 0rem -0.5rem 1rem rgba(0, 0, 0, .05);
+}
+
+.user-cell {
+  cursor: pointer;
+  border-bottom: 1px solid #e9ecef;
+  background: #fff;
+  box-shadow: inset 0rem -0.5rem 1rem rgba(0, 0, 0, .05);
+}
+
+.group-cell.active,
+.user-cell.choosed,
+.group-cell:hover,
+.user-cell:hover {
+  background: #e9ecef;
+}
+
+.box-shadow {
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, .05);
+}

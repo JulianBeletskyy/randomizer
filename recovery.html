@@ -1,0 +1,14 @@
+<div class="text-center demo-body" ng-controller="RecoveryCtrl">
+	<div class="d-flex justify-content-center">
+		<div class="align-self-center">
+			<form name="form">
+
+				<h2>{{ langs.get('Enter your email') }}</h2>
+				<div class="form-group">
+					<input name="email" type="email" class="form-control" ng-model="recoveryEmail" required="required" />
+				</div>
+				<button type="button" class="btn btn-outline-success" ng-click="recovery()">{{ langs.get('Recovery') }}</button>
+			</form>
+		</div>
+	</div>
+</div>

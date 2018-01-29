@@ -1,0 +1,152 @@
+<div class="container demo-body" ng-controller="MainPageCtrl" ng-init="init()">
+	<div class="row">
+		<div class="col-sm-12 col-md-12 col-lg-6">
+			<div class="fastGame">
+				<div class="card">
+					<div class="card-header text-center">
+						{{ langs.get("Fast Game")}}
+					</div>
+					<div class="card-body">
+						<ul class="nav nav-tabs nav-justified mb-3" role="tablist">
+							<li class="nav-item">
+								<a class="nav-link active" href="javascript:;" role="tab" aria-selected="true" ng-click="chooseType = 'party'" ng-class="{'active': chooseType == 'party'}">{{ langs.get("Teams") }}</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="javascript:;" role="tab" aria-selected="true" ng-click="chooseType = 'solo'" ng-class="{'active': chooseType == 'solo'}">{{ langs.get("Leaders") }}</a>
+							</li>
+						</ul>
+						<div class="tab-content">
+							<div ng-switch="chooseType">
+								<div ng-switch-when="party">
+									<div class="row">
+										<div class="col-sm-12 col-md-8">
+											<div class="form-group">
+												<label>{{ langs.get("Add player") }}:</label>
+												<label class="float-right">{{ langs.get("Choosed players") }}: {{ countInGame() }}</label>
+												<div class="input-group">
+													<input type="text" name="userName" class="form-control" placeholder="{{langs.get('Enter Name')}}" ng-model="player.name" required="required">
+													<span class="input-group-btn">
+											        	<button class="btn btn-outline-secondary" type="button" ng-click="addPlayer()">
+											        		<i class="fas fa-user-plus fa-md" aria-hidden="true"></i>
+											        	</button>
+											      	</span>
+												</div>
+											</div>
+										</div>
+										<div class="col-sm-12 col-md-4">
+											<div class="form-group">
+												<label>{{ langs.get("Count in team") }}</label>
+												<select class="form-control" ng-model="countInTeam">
+													<option ng-repeat="i in maxPlayers() track by $index" value="{{$index + 1}}">{{ $index + 1 }}</option>
+												</select>
+											</div>
+										</div>
+										<div class="col-sm-12">
+											<div class="list-body">
+												<div class="form-group" ng-repeat="friend in friendList track by $index">
+													<ul class="list-group">
+													  	<div class="list-group-item" ng-click="friend.play = ! friend.play" ng-class="{'list-group-item-success': friend.play, 'list-group-item-action': ! friend.play}">
+															<span>{{ friend.name }}</span>
+															<i class="fas fa-trash float-right text-danger" ng-click="removePlayer($index)"></i>
+													  	</div>
+													</ul>
+												</div>
+											</div>
+										</div>
+										<div class="col-sm-12 text-center">
+											<div class="form-group">
+												<button type="button" class="btn btn-outline-success" ng-click="gererateTeams(countInTeam)">{{ langs.get("Dereban") }}</button>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div ng-switch-when="solo">
+									<div class="row">
+										<div class="col-sm-12 col-md-8">
+											<div class="form-group">
+												<label>{{ langs.get("Add player") }}:</label>
+												<label class="float-right">{{ langs.get("Choosed players") }}: {{ countInGame() }}</label>
+												<div class="input-group">
+													<input type="text" name="userName" class="form-control" placeholder="{{langs.get('Enter Name')}}" ng-model="player.name" required="required">
+													<span class="input-group-btn">
+											        	<button class="btn btn-outline-secondary" type="button" ng-click="addPlayer()">
+											        		<i class="fas fa-user-plus fa-md" aria-hidden="true"></i>
+											        	</button>
+											      	</span>
+												</div>
+											</div>
+										</div>
+
+										<div class="col-sm-12 col-md-4">
+											<div class="form-group">
+												<label>{{ langs.get("Number of Leaders") }}</label>
+												<select class="form-control" ng-model="countLeaders">
+													<option ng-repeat="i in maxPlayers() track by $index" value="{{$index + 1}}">{{ $index + 1 }}</option>
+												</select>
+											</div>
+										</div>
+
+										<div class="col-sm-12">
+											<div class="list-body">
+												<div class="form-group" ng-repeat="friend in friendList track by $index">
+													<ul class="list-group">
+													  	<div class="list-group-item list-group-item-action" ng-click="friend.play = ! friend.play" ng-class="{'list-group-item-success': friend.play, 'list-group-item-action': ! friend.play}">
+															<span>{{ friend.name }}</span>
+															<i class="fas fa-trash float-right text-danger" ng-click="removePlayer($index)"></i>
+													  	</div>
+													</ul>
+												</div>
+											</div>
+										</div>
+
+										<div class="col-sm-12 text-center">
+											<div class="form-group">
+												<button type="button" class="btn btn-outline-success" ng-click="getLeader(countLeaders)">{{ langs.get("Dereban") }}</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>	
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>	
+
+		<div class="col-sm-12 col-md-12 col-lg-6" ng-show=" ! token">
+			<div>
+				<div class="card">
+					<div class="card-header text-center">
+						{{ langs.get("Registration") }}
+					</div>
+					<div class="card-body">
+						<form name="form" novalidate="novalidate" method="post">
+							<div class="form-group row">
+								<label for="staticEmail" class="col-sm-3 col-form-label">{{ langs.get("Email") }}:</label>
+								<div class="col-sm-9">
+									<div class="input-group">
+										<input type="email" name="email" class="form-control" id="staticEmail" placeholder="email@example.com" 
+										required="required" ng-model="user.email">
+										<span class="input-group-addon"><i class="far fa-envelope" area-hidden="true"></i></span>
+									</div>
+								</div>
+							</div>
+							<div class="form-group row">
+								<label for="inputPassword" class="col-sm-3 col-form-label">{{ langs.get("Password") }}:</label>
+								<div class="col-sm-9">
+									<div class="input-group">
+										<input type="password" name="password" class="form-control" id="inputPassword" required="required"
+										placeholder="{{ langs.get('Password') }}" ng-model="user.password" ng-minlength="6">
+										<span class="input-group-addon"><i class="fas fa-unlock" area-hidden="true"></i></span>
+									</div>
+								</div>
+							</div>
+						</form>	
+						<button class="btn btn-outline-success" ng-click=signUp()>{{ langs.get("Sign Up") }}</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
